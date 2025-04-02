@@ -27,7 +27,7 @@ Node* next_node(int64_t data, Node* prev) {
 Node* prev_node(int64_t data, Node* next) {
     Node* new = (Node *) malloc(sizeof(Node));
     new->data = data;
-    new->next = prev;
+    new->next = next;
     return new;
 }
 
@@ -46,11 +46,9 @@ bool search_forward(Node* head, int64_t data) {
 }
 
 /*** SinglyLinkedList Function Implementations */
-SinglyLinkedList* create_singly_linked_list(int64_t data) {
-    Node* head = (Node *) dangling_node(data);
-    SinglyLinkedList* list_ptr = (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
-    list_ptr->head = head;
-    return list_ptr;
+
+bool is_empty(SinglyLinkedList* list_ptr) {
+    return (list_ptr->head == NULL);
 }
 
 bool contains(SinglyLinkedList* list_ptr, int64_t data) {
@@ -58,23 +56,42 @@ bool contains(SinglyLinkedList* list_ptr, int64_t data) {
 }
 
 void append_node(SinglyLinkedList* list_ptr, int64_t data) {
-    Node* node = list_ptr->head;
-    while(node->next != NULL) {
-        node = node->next;
+    if (is_empty(list_ptr)) {
+        list_ptr->head = dangling_node(data);
+    } else {
+        Node* node = list_ptr->head;
+        while(node->next != NULL) {
+            node = node->next;
+        }
+        next_node(data, node);
     }
-    next_node(data, node);
+    list_ptr->size++;
+}
+
+void prepend_node(SinglyLinkedList* list_ptr, int64_t data) {
+    if (is_empty(list_ptr)) {
+        list_ptr->head = (Node *) dangling_node(data);
+    } else {
+        Node* head = prev_node(data, list_ptr->head);
+        list_ptr->head = head;
+    }
+    list_ptr->size++;
 }
 
 bool replace_node(SinglyLinkedList* list_ptr, int64_t data, int64_t index) {
-    int64_t counter = 0;
-    Node* node = list_ptr->head;
-    while(node->next != NULL) {
-        node = node->next;
-        counter++;
-        if (counter == index) {
-            node->data = data;
-            return true;
+    if (is_empty(list_ptr)) {
+        return false;
+    } else {
+        int64_t counter = 0;
+        Node* node = list_ptr->head;
+        while(node->next != NULL) {
+            node = node->next;
+            counter++;
+            if (counter == index) {
+                node->data = data;
+                return true;
+            }
         }
+        return false;
     }
-    return false;
 }

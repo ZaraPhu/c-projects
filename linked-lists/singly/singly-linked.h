@@ -32,6 +32,7 @@ typedef struct Node {
  */
 typedef struct {
     Node* head;
+    int64_t size;
 } SinglyLinkedList;
 
 
@@ -72,11 +73,10 @@ bool search_forward(Node* head, int64_t data);
 
 
 /**
- * @brief Creates a pointer to a new SinglyLinkedList with a head node
- *        created using the data passed as the parameter.
- * @param data The data attached to the head node of the new SinglyLinkedList
- */
-SinglyLinkedList* create_singly_linked_list(int64_t data);
+ * @brief Returns true if linked is empty and false otherwise.
+ * @param list_ptr A pointer to a SinglyLinkedList
+*/
+bool is_empty(SinglyLinkedList* list_ptr);
 
 /**
  * @brief Searches the whole SinglyLinkedList to see if it contains the data.
@@ -86,7 +86,6 @@ SinglyLinkedList* create_singly_linked_list(int64_t data);
 */
 bool contains(SinglyLinkedList* list_ptr, int64_t data);
 
-
 /**
  * @brief Appends a node to the end of a SinglyLinkedList with the data
  *        passed as a parameter.
@@ -94,6 +93,11 @@ bool contains(SinglyLinkedList* list_ptr, int64_t data);
  * @param data the data attached to the new node to be appended
  */
 void append_node(SinglyLinkedList* list_ptr, int64_t data);
+
+/**
+ * @brief Prepends a node to the 
+ */
+void prepend_node(SinglyLinkedList* list_ptr, int64_t data);
 
 /**
  * @brief Replaces the data for the node at the specified index of the 
