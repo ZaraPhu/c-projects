@@ -99,7 +99,24 @@ bool is_empty(SinglyLinkedList* list_ptr);
 */
 uint64_t size(SinglyLinkedList* list_ptr);
 
+/**
+ * @brief Converts the SinglyLinkedList to an array of 64-bit integers.
+ *        Returns a pointer to the array of integers, allocated on the heap.
+ *        This must be freed by the user to prevent memory leaks.
+ *        Returns NULL if the list is empty.
+ * @param list_ptr A pointer to the SinglyLinkedList to convert.
+*/
 int64_t* to_array(SinglyLinkedList* list_ptr); 
+
+/**
+ * @brief Returns a pointer to the data at the specified index of the SinglyLinkedList.
+ *        The data is returns as a pointer, and the user must handle dereferencing 
+ *        the pointer and prevent unwanted modifications to the data.
+ *        Returns NULL if the list is empty or the index is out of bounds.
+ * @param list_ptr A pointer to the SinglyLinkedList to get from.
+ * @param index The index of the node to get the data from.
+ */
+int64_t* get(SinglyLinkedList* list_ptr, uint64_t index);
 
 /**
  * @brief Searches the whole SinglyLinkedList to see if it contains the data.
@@ -136,6 +153,14 @@ void prepend_node(SinglyLinkedList* list_ptr, int64_t data);
  */
 bool insert_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
 
+/**
+ * @brief Inserts a node to the given index (if possible). If the end of the 
+ *        list is reached, the new node is appended to the end of the list. If
+ *        the list is empty, the new node is set as the head node. 
+ * @param list_ptr A pointer to the SinglyLinkedList to modify.
+ * @param data The data to attach to the new node.
+ * @param index The index at which to insert the new node.
+ */
 void lazy_insert_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
 
 /**
@@ -147,5 +172,28 @@ void lazy_insert_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
  * @param index the index at which to insert the new node
  */
 bool replace_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
+
+/**
+ * @brief Deletes the first node in the SinglyLinkedList. Returns true if
+ *        the node was successfully deleted and false if the list is empty.
+ * @param list_ptr A pointer to the SinglyLinkedList to modify.
+ */
+bool delete_first(SinglyLinkedList* list_ptr);
+
+/**
+ * @brief Deletes the last node in the SinglyLinkedList. Returns true if
+ *        the node was successfully deleted and false if the list is empty.
+ * @param list_ptr A pointer to the SinglyLinkedList to modify.
+ */
+bool delete_last(SinglyLinkedList* list_ptr);
+
+/**
+ * @brief Deletes the node at the specified index in the SinglyLinkedList.
+ *        Returns true if the node was successfully deleted and false if the
+ *        list is empty or the index is out of bounds.
+ * @param list_ptr A pointer to the SinglyLinkedList to modify.
+ * @param index The index of the node to delete.
+ */
+bool delete_node(SinglyLinkedList* list_ptr, int64_t index);
 
 #endif

@@ -7,6 +7,7 @@ Creation Date: March 29, 2025.
 */
 
 /*** Dependencies ***/
+#include <stdbool.h>
 #include <stdint.h>
 #include<stdlib.h>
 #include"singly-linked.h"
@@ -67,7 +68,9 @@ int64_t* to_array(SinglyLinkedList* list_ptr) {
         return NULL;
     }
     uint64_t size = list_ptr->size;
-    int64_t arr[size];
+    // needs to be heap-allocated so it doesn't get freed when
+    // the function is popped off the stack
+    int64_t* arr = (int64_t *) malloc(sizeof(int64_t) * list_ptr->size);
     Node* node = list_ptr->head;
     for (int i = 0; i < size; i++) {
         arr[i] = node->data;
@@ -78,6 +81,23 @@ int64_t* to_array(SinglyLinkedList* list_ptr) {
 
 bool contains(SinglyLinkedList* list_ptr, int64_t data) {
     return search_forward(list_ptr->head, data);
+}
+
+int64_t* get(SinglyLinkedList* list_ptr, uint64_t index) {
+    if (is_empty(list_ptr)) {
+        return NULL;
+    } else {
+        int64_t counter = 0;
+        Node* node = list_ptr->head;
+        while(node->next != NULL) {
+            if (counter == index) {
+                return &(node->data);
+            }
+            node = node->next;
+            counter++;
+        }
+        return NULL;
+    }
 }
 
 void append_node(SinglyLinkedList* list_ptr, int64_t data) {
@@ -151,6 +171,7 @@ bool replace_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index) {
         return false;
     } else if (index == 0) {
         list_ptr->head = (Node *) dangling_node(data);
+        return true;
     } else {
         int64_t counter = 0;
         Node* node = list_ptr->head;
@@ -161,6 +182,66 @@ bool replace_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index) {
             }
             node = node->next;
             counter++;
+        }
+        return false;
+    }
+}
+
+bool delete_first(SinglyLinkedList* list_ptr) {
+    if (is_empty(list_ptr)) {
+        return false;
+    } else {
+        Node* node = list_ptr->head;
+        list_ptr->head = node->next;
+        free(node); // make sure to free the node
+        // to prevent memory leaks
+        list_ptr->size--;
+        return true;
+    }
+}
+
+bool delete_last(SinglyLinkedList* list_ptr) {
+    if (is_empty(list_ptr)) {
+        return false;
+    } else {
+        Node* node = list_ptr->head;
+        Node* prev_node = list_ptr->head;
+        while(node->next != NULL) {
+            node = node->next;
+            if (node->next == NULL) {
+                prev_node->next = NULL;
+            } else {
+                prev_node = prev_node->next;
+            }
+        }
+        free(node);
+        list_ptr->size--;
+        return true;
+    }
+}
+
+bool delete_node(SinglyLinkedList *list_ptr, int64_t index) {
+    if (is_empty(list_ptr)) {
+        return false;
+    } else if (index == 0) {
+        Node* node = list_ptr->head;
+        list_ptr->head = NULL;
+        free(node);
+        list_ptr->size--;
+        return true;
+    } else {
+        int64_t counter = 0;
+        Node* node = list_ptr->head;
+        Node* prev_node = list_ptr->head;
+        while(node->next != NULL) {
+            node = node->next;
+            if (counter == index) {
+                prev_node->next = node->next;
+                free(node);
+                list_ptr->size--;
+                return true;
+            }
+            prev_node = prev_node->next;
         }
         return false;
     }
