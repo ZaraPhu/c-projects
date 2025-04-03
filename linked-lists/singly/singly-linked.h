@@ -127,6 +127,15 @@ int64_t* get(SinglyLinkedList* list_ptr, uint64_t index);
 bool contains(SinglyLinkedList* list_ptr, int64_t data);
 
 /**
+ * @brief Searches the whole SinglyLinkedList to find the index of the node
+ *        containing the data passed as a parameter. Returns the index of the
+ *        node if the data is found, returns UINT64_MAX otherwise.
+ * @param list_ptr A pointer to the SinglyLinkedList to be searched.
+ * @param data The data to search for.
+*/
+uint64_t find(SinglyLinkedList* list_ptr, int64_t data);
+
+/**
  * @brief Appends a node to the end of a SinglyLinkedList with the data
  *        passed as a parameter. If the list has no head node, then 
  *        the head node is set to the new node.
@@ -196,4 +205,14 @@ bool delete_last(SinglyLinkedList* list_ptr);
  */
 bool delete_node(SinglyLinkedList* list_ptr, int64_t index);
 
+/**
+ * @brief Clears the SinglyLinkedList by freeing all nodes and setting the
+ *        head node to NULL.
+ * @param list_ptr A pointer to the SinglyLinkedList to clear.
+*/
+void clear(SinglyLinkedList* list_ptr);
+
+/**
+*/
+void reverse_list(SinglyLinkedList* list_ptr);
 #endif

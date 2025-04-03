@@ -7,8 +7,6 @@ Creation Date: March 29, 2025.
 */
 
 /*** Dependencies ***/
-#include <stdbool.h>
-#include <stdint.h>
 #include<stdlib.h>
 #include"singly-linked.h"
 
@@ -81,6 +79,23 @@ int64_t* to_array(SinglyLinkedList* list_ptr) {
 
 bool contains(SinglyLinkedList* list_ptr, int64_t data) {
     return search_forward(list_ptr->head, data);
+}
+
+uint64_t find(SinglyLinkedList* list_ptr, int64_t data) {
+    if(is_empty(list_ptr)) {
+        return UINT64_MAX;
+    } else {
+        uint64_t index = 0;
+        Node* node = list_ptr->head;
+        while(node->next != NULL) {
+            if(node->data == data) {
+                break;
+            }
+            node = node->next;
+            index++;
+        }
+        return index;
+    }
 }
 
 int64_t* get(SinglyLinkedList* list_ptr, uint64_t index) {
@@ -244,5 +259,18 @@ bool delete_node(SinglyLinkedList *list_ptr, int64_t index) {
             prev_node = prev_node->next;
         }
         return false;
+    }
+}
+
+void clear(SinglyLinkedList* list_ptr) {
+    if (!(is_empty(list_ptr))) {
+        while(list_ptr->head!= NULL) {
+            delete_first(list_ptr);
+        }
+    }
+}
+
+void reverse_list(SinglyLinkedList* list_ptr) {
+    if (!(is_empty(list_ptr))) {
     }
 }
