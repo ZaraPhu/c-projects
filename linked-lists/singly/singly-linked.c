@@ -87,7 +87,7 @@ uint64_t find(SinglyLinkedList* list_ptr, int64_t data) {
     } else {
         uint64_t index = 0;
         Node* node = list_ptr->head;
-        while(node->next != NULL) {
+        while(node != NULL) {
             if(node->data == data) {
                 break;
             }
@@ -104,7 +104,7 @@ int64_t* get(SinglyLinkedList* list_ptr, uint64_t index) {
     } else {
         int64_t counter = 0;
         Node* node = list_ptr->head;
-        while(node->next != NULL) {
+        while(node != NULL) {
             if (counter == index) {
                 return &(node->data);
             }
@@ -202,64 +202,43 @@ bool replace_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index) {
     }
 }
 
-bool delete_first(SinglyLinkedList* list_ptr) {
-    if (is_empty(list_ptr)) {
-        return false;
+void delete_first(SinglyLinkedList* list_ptr) {
+    if (list_ptr->size == 1) {
+        free(list_ptr->head);
+        list_ptr->head = NULL;
+        list_ptr->size = 0;
     } else {
         Node* node = list_ptr->head;
         list_ptr->head = node->next;
         free(node); // make sure to free the node
         // to prevent memory leaks
         list_ptr->size--;
-        return true;
     }
 }
 
-bool delete_last(SinglyLinkedList* list_ptr) {
-    if (is_empty(list_ptr)) {
-        return false;
+void delete_last(SinglyLinkedList* list_ptr) {
+    if(list_ptr->size == 1) {
+        free(list_ptr->head);
+        list_ptr->head = NULL;
+        list_ptr->size = 0;
     } else {
-        Node* node = list_ptr->head;
         Node* prev_node = list_ptr->head;
-        while(node->next != NULL) {
-            node = node->next;
+        Node* node = prev_node->next;
+        while(node != NULL) {
             if (node->next == NULL) {
                 prev_node->next = NULL;
-            } else {
-                prev_node = prev_node->next;
-            }
+                break;
+            } 
+            prev_node = node;
+            node = node->next;
         }
         free(node);
         list_ptr->size--;
-        return true;
     }
 }
 
-bool delete_node(SinglyLinkedList *list_ptr, int64_t index) {
-    if (is_empty(list_ptr)) {
-        return false;
-    } else if (index == 0) {
-        Node* node = list_ptr->head;
-        list_ptr->head = NULL;
-        free(node);
-        list_ptr->size--;
-        return true;
-    } else {
-        int64_t counter = 0;
-        Node* node = list_ptr->head;
-        Node* prev_node = list_ptr->head;
-        while(node->next != NULL) {
-            node = node->next;
-            if (counter == index) {
-                prev_node->next = node->next;
-                free(node);
-                list_ptr->size--;
-                return true;
-            }
-            prev_node = prev_node->next;
-        }
-        return false;
-    }
+void delete_node(SinglyLinkedList *list_ptr, int64_t index) {
+    
 }
 
 void clear(SinglyLinkedList* list_ptr) {
@@ -271,6 +250,17 @@ void clear(SinglyLinkedList* list_ptr) {
 }
 
 void reverse_list(SinglyLinkedList* list_ptr) {
-    if (!(is_empty(list_ptr))) {
-    }
+    if (list_ptr->size >= 2) {
+        Node* prev = NULL;
+        Node* curr = list_ptr->head;
+        Node* position = curr->next;
+        while (position != NULL) {
+            curr->next = prev;
+            prev = curr;
+            curr = position;
+            position = position->next;
+        }
+        curr->next = prev;
+        list_ptr->head = curr;
+    } 
 }

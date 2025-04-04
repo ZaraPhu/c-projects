@@ -183,27 +183,26 @@ void lazy_insert_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
 bool replace_node(SinglyLinkedList* list_ptr, int64_t data, uint64_t index);
 
 /**
- * @brief Deletes the first node in the SinglyLinkedList. Returns true if
- *        the node was successfully deleted and false if the list is empty.
+ * @brief Deletes the first node in the SinglyLinkedList.
+ *        If the list is empty, no action is performed.
  * @param list_ptr A pointer to the SinglyLinkedList to modify.
  */
-bool delete_first(SinglyLinkedList* list_ptr);
+void delete_first(SinglyLinkedList* list_ptr);
 
 /**
- * @brief Deletes the last node in the SinglyLinkedList. Returns true if
- *        the node was successfully deleted and false if the list is empty.
+ * @brief Deletes the last node in the SinglyLinkedList.
+ *        If the list is empty, no action is performed.
  * @param list_ptr A pointer to the SinglyLinkedList to modify.
  */
-bool delete_last(SinglyLinkedList* list_ptr);
+void delete_last(SinglyLinkedList* list_ptr);
 
 /**
  * @brief Deletes the node at the specified index in the SinglyLinkedList.
- *        Returns true if the node was successfully deleted and false if the
- *        list is empty or the index is out of bounds.
+ *        If the list is empty or the index is out of bounds, no action is performed.
  * @param list_ptr A pointer to the SinglyLinkedList to modify.
  * @param index The index of the node to delete.
  */
-bool delete_node(SinglyLinkedList* list_ptr, int64_t index);
+void delete_node(SinglyLinkedList* list_ptr, int64_t index);
 
 /**
  * @brief Clears the SinglyLinkedList by freeing all nodes and setting the
@@ -213,6 +212,11 @@ bool delete_node(SinglyLinkedList* list_ptr, int64_t index);
 void clear(SinglyLinkedList* list_ptr);
 
 /**
-*/
+ * @brief Reverses the order of nodes in the SinglyLinkedList.
+ *        After calling this function, the last node becomes the first node,
+ *        the second-to-last node becomes the second node, and so on.
+ *        If the list is empty or contains only one node, it remains unchanged.
+ * @param list_ptr A pointer to the SinglyLinkedList to reverse.
+ */
 void reverse_list(SinglyLinkedList* list_ptr);
 #endif
