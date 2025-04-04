@@ -25,7 +25,9 @@ uint8_t DANGLING_NODE_NUM_TESTS = 6;
 uint8_t NEXT_NODE_NUM_TESTS = 6;
 uint8_t PREV_NODE_NUM_TESTS = 6;
 
+
 // for SinglyLinkedList functions
+uint8_t CREATE_EMPTY_NUM_TESTS = 1;
 uint8_t IS_EMPTY_NUM_TESTS = 3;
 uint8_t SIZE_NUM_TESTS = 3;
 
@@ -247,6 +249,32 @@ bool* test_prev_node() {
 
 /*** SinglyLinkedList Unit Tests ***/
 
+/** 
+ * @brief Tests the create_empty function of the SinglyLinkedList implementation
+ *
+ * This function performs a test on the create_empty functionality:
+ * 1. Verifies that a newly created linked list has its head node correctly set to NULL
+ *
+ * @return bool* An array of boolean values where each element represents the pass (1) or fail (0)
+ *         status of a test. The array contains CREATE_EMPTY_NUM_TESTS elements and must be freed by
+ *         the caller when no longer needed.
+ */
+bool* test_create_empty() {
+    bool* tests_status = (bool *) malloc(sizeof(bool) * CREATE_EMPTY_NUM_TESTS);
+    SinglyLinkedList* list_ptr = (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
+
+    // Test 1: head node is set to null
+    if (list_ptr->head == NULL) {
+        tests_status[0] = PASS;
+    } else {
+        tests_status[0] = FAIL;
+    }
+
+    free(list_ptr);
+
+    return tests_status;
+}
+
 /** This documentation was written by AI
  * @brief Tests the is_empty function of the SinglyLinkedList implementation
  *
@@ -289,7 +317,38 @@ bool* test_is_empty() {
     return tests_status;
 }
 
+bool* test_size() {
+    bool* tests_status = (bool *) malloc(sizeof(bool) * SIZE_NUM_TESTS);
+    SinglyLinkedList* list_ptr = create_empty_list();
+    
+    // Test 1: empty list has size 0
+    if(size(list_ptr) != 0) {
+        tests_status[0] = FAIL;
+    } else {
+        tests_status[0] = PASS;
+    }
+    
+    // Test 2: a list with one node has size 1
+    append_node(list_ptr, 13);
+    if(size(list_ptr) != 1) {
+        tests_status[1] = FAIL;
+    } else {
+        tests_status[1] = PASS;
+    }
+    
+    // Test 3: a list with more than one element has the correct size
+    append_node(list_ptr, 14);
+    if(size(list_ptr) != 2) {
+        tests_status[2] = FAIL;
+    } else {
+        tests_status[2] = PASS;
+    }
+    
+    return tests_status;
+}
+
 /*** Helper Functions */
+
 /**
  * @brief Displays the results of unit test functions
  *
@@ -326,18 +385,32 @@ void display_test_results(bool* tests_status, int8_t num_tests, bool verbose) {
 
 int main() {
     bool* tests_status = test_dangling_node();
-    printf("Testing dangling_node:\n");
+    printf("Testing dangling_node function:\n");
     display_test_results(tests_status, DANGLING_NODE_NUM_TESTS, false);
-    
+    free(tests_status);
+
     tests_status = test_next_node();
-    printf("Testing next_node:\n");
+    printf("Testing next_node function:\n");
     display_test_results(tests_status, NEXT_NODE_NUM_TESTS, false);
-    
+    free(tests_status);
+
     tests_status = test_prev_node();
-    printf("Testing prev_node:\n");
+    printf("Testing prev_node function:\n");
     display_test_results(tests_status, PREV_NODE_NUM_TESTS, false);
+    free(tests_status);
     
+    tests_status = test_create_empty();
+    printf("Testing create_empty function:\n");
+    display_test_results(tests_status, CREATE_EMPTY_NUM_TESTS, false);
+    free(tests_status);
+
     tests_status = test_is_empty();
-    printf("Testing is_empty:\n");
+    printf("Testing is_empty function:\n");
     display_test_results(tests_status, IS_EMPTY_NUM_TESTS, false);
+    free(tests_status);
+    
+    tests_status = test_size();
+    printf("Testing size function:\n");
+    display_test_results(tests_status, SIZE_NUM_TESTS, false);
+    free(tests_status);
 }

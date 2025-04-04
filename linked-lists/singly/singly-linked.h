@@ -86,6 +86,26 @@ bool search_forward(Node* start, int64_t data);
 
 /*** SinglyLinkedList Functions ***/
 
+/**
+ * @brief Creates an empty SinglyLinkedList with no nodes.
+ *        Returns a pointer to the newly created SinglyLinkedList.
+ *        Note: The user must manually free this list pointer when
+ *        it is no longer needed to prevent memory leaks.
+ * @return A pointer to a new empty SinglyLinkedList.
+ */
+SinglyLinkedList* create_empty_list();
+
+/**
+ * @brief Creates a SinglyLinkedList from the provided array.
+ *        Returns a pointer to the newly created SinglyLinkedList.
+ *        Returns an empty list if the array length is 0.
+ *        Note: The user must manually free this list pointer when
+ *        it is no longer needed to prevent memory leaks.
+ * @param arr A pointer to the array of 64-bit integers.
+ * @param arr_length The length of the array.
+ * @return A pointer to a new SinglyLinkedList containing the array elements.
+ */
+SinglyLinkedList* list_from_array(int64_t* arr, uint64_t arr_length);
 
 /**
  * @brief Returns true if linked is empty and false otherwise.

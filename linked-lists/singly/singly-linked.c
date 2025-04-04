@@ -7,6 +7,7 @@ Creation Date: March 29, 2025.
 */
 
 /*** Dependencies ***/
+#include <stdint.h>
 #include<stdlib.h>
 #include"singly-linked.h"
 
@@ -52,6 +53,21 @@ bool search_forward(Node* start, int64_t data) {
 }
 
 /*** SinglyLinkedList Function Implementations */
+
+SinglyLinkedList* create_empty_list() {
+    return (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
+}
+
+SinglyLinkedList* list_from_array(int64_t* arr, uint64_t arr_length) {
+    SinglyLinkedList* list_ptr = create_empty_list();
+    if (arr_length == 0) {
+        return list_ptr;
+    }
+    for (int i = 0; i < arr_length; i++) {
+        append_node(list_ptr, arr[i]);
+    }
+    return list_ptr;
+}
 
 bool is_empty(SinglyLinkedList* list_ptr) {
     return (list_ptr->head == NULL);
