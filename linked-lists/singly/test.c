@@ -101,7 +101,7 @@ bool* test_next_node() {
     bool* tests_status = (bool *) malloc(sizeof(bool) * NEXT_NODE_NUM_TESTS);
 
     Node* base = dangling_node(0);
-    
+
     // Test 1: 0 is set properly for the Node
     Node* node = next_node(0, base);
     tests_status[0] = (node->data == 0);
@@ -150,7 +150,7 @@ bool* test_prev_node() {
     bool* tests_status = (bool *) malloc(sizeof(bool) * PREV_NODE_NUM_TESTS);
 
     Node* base = dangling_node(0);
-    
+
     // Test 1: 0 is set properly for the Node
     Node* node = prev_node(0, base);
     tests_status[0] = (node->data == 0);
@@ -401,7 +401,7 @@ int main() {
     printf("Testing search_forward function: ");
     display_test_results(tests_status, SEARCH_FORWARD_NUM_TESTS, false);
     free(tests_status);
-    
+
     tests_status = test_create_empty();
     printf("Testing create_empty function: ");
     display_test_results(tests_status, CREATE_EMPTY_NUM_TESTS, false);
@@ -416,4 +416,6 @@ int main() {
     printf("Testing size function: ");
     display_test_results(tests_status, SIZE_NUM_TESTS, false);
     free(tests_status);
+
+    return 0;
 }

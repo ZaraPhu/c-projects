@@ -26,8 +26,8 @@ Creation Date: April 4, 2025.
  */
 typedef struct Node {
     int64_t data;     /**< The data stored in this node */
-    Node* prev;       /**< Pointer to the previous node in the list, or NULL if this is the first node */
-    Node* next;       /**< Pointer to the next node in the list, or NULL if this is the last node */
+    struct Node* prev;       /**< Pointer to the previous node in the list, or NULL if this is the first node */
+    struct Node* next;       /**< Pointer to the next node in the list, or NULL if this is the last node */
 } Node;
 
 /**
