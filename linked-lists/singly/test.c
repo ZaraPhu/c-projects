@@ -55,51 +55,27 @@ bool* test_dangling_node() {
 
     // Test 1: 0 is set properly for the Node
     Node* node = dangling_node(0);
-    if (node->data == 0) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = (node->data == 0);
 
     // Test 2: Nodes with 0 as data have null next pointer
-    if(node->next == NULL) {
-        tests_status[1] = PASS;
-    } else {
-        tests_status[1] = FAIL;
-    }
+    tests_status[1] = (node->next == NULL);
     free(node);
 
     // Test 3: positive numbers are set properly for the node
     node = dangling_node(INT64_MAX);
-    if (node->data == INT64_MAX) {
-        tests_status[2] = PASS;
-    } else {
-        tests_status[2] = FAIL;
-    }
+    tests_status[2] = (node->data == INT64_MAX);
 
     // Test 4: Nodes with positive data have NULL next pointers
-    if (node->next == NULL) {
-        tests_status[3] = PASS;
-    } else {
-        tests_status[3] = FAIL;
-    }
+    tests_status[3] = (node->next == NULL);
     free(node);
 
     // Test 5: negative numbers are set properly for the node
     // this next test case was AI generated
     node = dangling_node(INT64_MIN);
-    if (node->data == INT64_MIN) {
-        tests_status[4] = PASS;
-    } else {
-        tests_status[4] = FAIL;
-    }
+    tests_status[4] = (node->data == INT64_MIN);
 
     // Test 6: Nodes with negative data have NULL next pointers
-    if (node->next == NULL) {
-        tests_status[5] = PASS;
-    } else {
-        tests_status[5] = FAIL;
-    }
+    tests_status[5] = (node->next == NULL);
     free(node);
     return tests_status;
 }
@@ -124,53 +100,30 @@ bool* test_next_node() {
     // function as context
     bool* tests_status = (bool *) malloc(sizeof(bool) * NEXT_NODE_NUM_TESTS);
 
-    // Test 1: 0 is set properly for the Node
     Node* base = dangling_node(0);
+    
+    // Test 1: 0 is set properly for the Node
     Node* node = next_node(0, base);
-    if (node->data == 0) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = (node->data == 0);
 
-    // Test 2: Next pointer points to the base node
-    if(base->next == node) {
-        tests_status[1] = PASS;
-    } else {
-        tests_status[1] = FAIL;
-    }
+    // Test 2: the base node's next pointer is equal to node
+    tests_status[1] = (base->next == node);
     free(node);
 
     // Test 3: positive numbers are set properly for the node
     node = next_node(INT64_MAX, base);
-    if (node->data == INT64_MAX) {
-        tests_status[2] = PASS;
-    } else {
-        tests_status[2] = FAIL;
-    }
+    tests_status[2] = (node->data == INT64_MAX);
 
-    // Test 4: Next pointer points to the base node
-    if (base->next == node) {
-        tests_status[3] = PASS;
-    } else {
-        tests_status[3] = FAIL;
-    }
+    // Test 4: the base node's next pointer is equal to node
+    tests_status[3] = (base->next == node);
     free(node);
 
     // Test 5: negative numbers are set properly for the node
     node = next_node(INT64_MIN, base);
-    if (node->data == INT64_MIN) {
-        tests_status[4] = PASS;
-    } else {
-        tests_status[4] = FAIL;
-    }
+    tests_status[4] = (node->data == INT64_MIN);
 
-    // Test 6: Next pointer points to the base node
-    if (base->next == node) {
-        tests_status[5] = PASS;
-    } else {
-        tests_status[5] = FAIL;
-    }
+    // Test 6: the base node's next pointer is equal to node
+    tests_status[5] = (base->next == node);
     free(node);
     free(base);
     return tests_status;
@@ -196,53 +149,30 @@ bool* test_prev_node() {
     // function as context
     bool* tests_status = (bool *) malloc(sizeof(bool) * PREV_NODE_NUM_TESTS);
 
-    // Test 1: 0 is set properly for the Node
     Node* base = dangling_node(0);
+    
+    // Test 1: 0 is set properly for the Node
     Node* node = prev_node(0, base);
-    if (node->data == 0) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = (node->data == 0);
 
     // Test 2: Next pointer points to the base node
-    if(node->next == base) {
-        tests_status[1] = PASS;
-    } else {
-        tests_status[1] = FAIL;
-    }
+    tests_status[1] = (node->next == base);
     free(node);
 
     // Test 3: positive numbers are set properly for the node
     node = prev_node(INT64_MAX, base);
-    if (node->data == INT64_MAX) {
-        tests_status[2] = PASS;
-    } else {
-        tests_status[2] = FAIL;
-    }
+    tests_status[2] = (node->data == INT64_MAX);
 
     // Test 4: Next pointer points to the base node
-    if (node->next == base) {
-        tests_status[3] = PASS;
-    } else {
-        tests_status[3] = FAIL;
-    }
+    tests_status[3] = (node->next == base);
     free(node);
 
     // Test 5: negative numbers are set properly for the node
     node = prev_node(INT64_MIN, base);
-    if (node->data == INT64_MIN) {
-        tests_status[4] = PASS;
-    } else {
-        tests_status[4] = FAIL;
-    }
+    tests_status[4] = (node->data == INT64_MIN);
 
     // Test 6: Next pointer points to the base node
-    if (node->next == base) {
-        tests_status[5] = PASS;
-    } else {
-        tests_status[5] = FAIL;
-    }
+    tests_status[5] = (node->next == base);
     free(node);
     free(base);
     return tests_status;
@@ -267,25 +197,13 @@ bool* test_between_node() {
 
     Node* node = between_node(12, prev, next);
     // Test 1: data is set properly
-    if (node->data == 12) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = (node->data == 12);
 
     // Test 2: inserted node's next pointer is set correctly
-    if (node->next == next) {
-        tests_status[1] = PASS;
-    } else {
-        tests_status[1] = FAIL;
-    }
+    tests_status[1] = (node->next == next);
 
     // Test 3: prev node's next pointer is set correctly
-    if (prev->next == node) {
-        tests_status[2] = PASS;
-    } else {
-        tests_status[2] = FAIL;
-    }
+    tests_status[2] = (prev->next == node);
 
     // free all the allocated data
     free(node);
@@ -317,33 +235,16 @@ bool* test_search_forward() {
     Node* end = next_node(3, middle);
 
     // Test 1: data is located at the beginning of the chain
-    if(search_forward(start, 1)) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = search_forward(start, 1);
 
-    // Tests 2 and 3 were generated by AI
     // Test 2: data is located in the middle of the chain
-    if(search_forward(start, 2)) {
-        tests_status[1] = PASS;
-    } else {
-        tests_status[1] = FAIL;
-    }
+    tests_status[1] = search_forward(start, 2);
 
     // Test 3: data is located at the end of the chain
-    if(search_forward(start, 3)) {
-        tests_status[2] = PASS;
-    } else {
-        tests_status[2] = FAIL;
-    }
+    tests_status[2] = search_forward(start, 3);
 
     // Test 4: data is not on the chain
-    if (!(search_forward(start, 4))) {
-        tests_status[3] = PASS;
-    } else {
-        tests_status[3] = FAIL;
-    }
+    tests_status[3] = !search_forward(start, 4);
 
     free(start);
     free(middle);
@@ -369,11 +270,7 @@ bool* test_create_empty() {
     SinglyLinkedList* list_ptr = (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
 
     // Test 1: head node is set to null
-    if (list_ptr->head == NULL) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
+    tests_status[0] = (list_ptr->head == NULL);
 
     free(list_ptr);
 
@@ -392,35 +289,25 @@ bool* test_create_empty() {
  *         status of a test. The array contains IS_EMPTY_NUM_TESTS elements and must be freed by
  *         the caller when no longer needed.
  */
-bool* test_is_empty() {
-    // need heap allocated array to return each test fail (0) or pass (1)
-    bool* tests_status = (bool *) malloc(sizeof(bool) * IS_EMPTY_NUM_TESTS);
-    SinglyLinkedList* list_ptr = (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
-    // Test 1: a new singly linked list is empty
-    if (is_empty(list_ptr)) {
-        tests_status[0] = PASS;
-    } else {
-        tests_status[0] = FAIL;
-    }
-    // Test 2: a singly linked list with one element is not empty
-    append_node(list_ptr, 12);
-    if (is_empty(list_ptr)) {
-        tests_status[1] = FAIL;
-    } else {
-        tests_status[1] = PASS;
-    }
-    // Test 3: a singly linked list with multiple elements is not empty
-    // this one was autocompleted by an AI code generation
-    append_node(list_ptr, 13);
-    append_node(list_ptr, 14);
-    if (is_empty(list_ptr)) {
-        tests_status[2] = FAIL;
-    } else {
-        tests_status[2] = PASS;
-    }
-    free(list_ptr);
-    return tests_status;
-}
+ bool* test_is_empty() {
+     // need heap allocated array to return each test fail (0) or pass (1)
+     bool* tests_status = (bool *) malloc(sizeof(bool) * IS_EMPTY_NUM_TESTS);
+     SinglyLinkedList* list_ptr = (SinglyLinkedList *) malloc(sizeof(SinglyLinkedList));
+     // Test 1: a new singly linked list is empty
+     tests_status[0] = is_empty(list_ptr);
+
+     // Test 2: a singly linked list with one element is not empty
+     append_node(list_ptr, 12);
+     tests_status[1] = !is_empty(list_ptr);
+
+     // Test 3: a singly linked list with multiple elements is not empty
+     append_node(list_ptr, 13);
+     append_node(list_ptr, 14);
+     tests_status[2] = !is_empty(list_ptr);
+
+     free(list_ptr);
+     return tests_status;
+ }
 
 /**
  * @brief Tests the size function of the SinglyLinkedList implementation
@@ -439,27 +326,16 @@ bool* test_size() {
     SinglyLinkedList* list_ptr = create_empty_list();
 
     // Test 1: empty list has size 0
-    if(size(list_ptr) != 0) {
-        tests_status[0] = FAIL;
-    } else {
-        tests_status[0] = PASS;
-    }
+    // Test 1: empty list has size 0
+    tests_status[0] = (size(list_ptr) == 0);
 
     // Test 2: a list with one node has size 1
     append_node(list_ptr, 13);
-    if(size(list_ptr) != 1) {
-        tests_status[1] = FAIL;
-    } else {
-        tests_status[1] = PASS;
-    }
+    tests_status[1] = (size(list_ptr) == 1);
 
     // Test 3: a list with more than one element has the correct size
     append_node(list_ptr, 14);
-    if(size(list_ptr) != 2) {
-        tests_status[2] = FAIL;
-    } else {
-        tests_status[2] = PASS;
-    }
+    tests_status[2] = (size(list_ptr) == 2);
 
     return tests_status;
 }
