@@ -7,7 +7,7 @@ Creation Date: March 29, 2025.
 */
 
 /*** Dependencies ***/
-#include <stdint.h>
+#include<stdint.h>
 #include<stdlib.h>
 #include"singly-linked.h"
 
