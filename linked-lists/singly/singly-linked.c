@@ -69,6 +69,16 @@ SinglyLinkedList* list_from_array(int64_t* arr, uint64_t arr_length) {
     return list_ptr;
 }
 
+SinglyLinkedList* copy(SinglyLinkedList* list_ptr) {
+    SinglyLinkedList* new_list = create_empty_list();
+    Node* curr_node = list_ptr->head;
+    while(curr_node != NULL) {
+        append_node(new_list, curr_node->data);
+        curr_node = curr_node->next;
+    }
+    return new_list;
+}
+
 bool is_empty(SinglyLinkedList* list_ptr) {
     return (list_ptr->head == NULL);
 }
@@ -77,7 +87,7 @@ uint64_t size(SinglyLinkedList* list_ptr) {
     return list_ptr->size;
 }
 
-int64_t* to_array(SinglyLinkedList* list_ptr) {
+int64_t* list_to_array(SinglyLinkedList* list_ptr) {
     if(is_empty(list_ptr)) {
         return NULL;
     }
@@ -91,6 +101,15 @@ int64_t* to_array(SinglyLinkedList* list_ptr) {
         node = node->next;
     }
     return arr;
+}
+
+// TODO: finish this
+void concat(SinglyLinkedList* src, SinglyLinkedList* dest) {
+    Node* node = dest->head;
+    while(node->next != NULL) {
+        node = node->next;
+    }
+    
 }
 
 bool contains(SinglyLinkedList* list_ptr, int64_t data) {
@@ -254,7 +273,7 @@ void delete_last(SinglyLinkedList* list_ptr) {
 }
 
 void delete_node(SinglyLinkedList *list_ptr, int64_t index) {
-    
+    // needs to be rewritten, it was NOT GOOD before
 }
 
 void clear(SinglyLinkedList* list_ptr) {

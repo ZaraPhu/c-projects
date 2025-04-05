@@ -108,6 +108,18 @@ SinglyLinkedList* create_empty_list();
 SinglyLinkedList* list_from_array(int64_t* arr, uint64_t arr_length);
 
 /**
+ * @brief Creates a deep copy of the provided SinglyLinkedList.
+ *        Returns a pointer to a new SinglyLinkedList with identical data
+ *        but completely separate memory allocations.
+ *        Returns an empty list if the source list is empty.
+ *        Note: The user must manually free this list pointer when
+ *        it is no longer needed to prevent memory leaks.
+ * @param list_ptr A pointer to the SinglyLinkedList to be copied.
+ * @return A pointer to a new SinglyLinkedList containing copies of all nodes.
+ */
+SinglyLinkedList* copy(SinglyLinkedList* list_ptr);
+
+/**
  * @brief Returns true if linked is empty and false otherwise.
  * @param list_ptr A pointer to a SinglyLinkedList.
 */
@@ -126,7 +138,9 @@ uint64_t size(SinglyLinkedList* list_ptr);
  *        Returns NULL if the list is empty.
  * @param list_ptr A pointer to the SinglyLinkedList to convert.
 */
-int64_t* to_array(SinglyLinkedList* list_ptr); 
+int64_t* list_to_array(SinglyLinkedList* list_ptr); 
+
+void concat(SinglyLinkedList* src, SinglyLinkedList* dest);
 
 /**
  * @brief Returns a pointer to the data at the specified index of the SinglyLinkedList.
