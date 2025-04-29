@@ -105,10 +105,6 @@ int64_t* list_to_array(SinglyLinkedList* list_ptr) {
 
 // TODO: finish this
 void concat(SinglyLinkedList* src, SinglyLinkedList* dest) {
-    Node* node = dest->head;
-    while(node->next != NULL) {
-        node = node->next;
-    }
     
 }
 
@@ -160,7 +156,6 @@ void append_node(SinglyLinkedList* list_ptr, int64_t data) {
         }
         next_node(data, node);
     }
-    list_ptr->size++;
 }
 
 void prepend_node(SinglyLinkedList* list_ptr, int64_t data) {
@@ -263,7 +258,7 @@ void delete_last(SinglyLinkedList* list_ptr) {
             if (node->next == NULL) {
                 prev_node->next = NULL;
                 break;
-            } 
+            }
             prev_node = node;
             node = node->next;
         }
@@ -297,5 +292,22 @@ void reverse_list(SinglyLinkedList* list_ptr) {
         }
         curr->next = prev;
         list_ptr->head = curr;
-    } 
+    }
+}
+
+bool check_circular(SinglyLinkedList* list_ptr) {
+    if (is_empty(list_ptr)) {
+        return false;
+    } else {
+        Node* t = list_ptr->head; // tortoise pointer
+        Node* h = list_ptr->head; // hare pointer
+        while ((h != NULL) && (h->next != NULL)) {
+            t = t->next;
+            h = h->next->next;
+            if (t == h) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

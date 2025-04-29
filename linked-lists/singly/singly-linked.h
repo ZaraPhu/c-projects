@@ -33,7 +33,7 @@ typedef struct Node {
  */
 typedef struct {
     Node* head;
-    uint64_t size;
+    Node* tail;
 } SinglyLinkedList;
 
 
@@ -253,4 +253,15 @@ void clear(SinglyLinkedList* list_ptr);
  * @param list_ptr A pointer to the SinglyLinkedList to reverse.
  */
 void reverse_list(SinglyLinkedList* list_ptr);
+
+/**
+ * @brief Checks if the SinglyLinkedList is circular.
+ *        A circular list has at least one node whose next pointer points to a previous node
+ *        in the list, forming a cycle. This function uses Floyd's Cycle-Finding Algorithm 
+ *        (also known as "tortoise and hare" algorithm) to detect cycles efficiently.
+ * @param list_ptr A pointer to the SinglyLinkedList to check.
+ * @return Returns true if the list is circular (contains a cycle), and false if the list
+ *         is not circular or if the list is empty.
+ */
+bool check_circular(SinglyLinkedList* list_ptr);
 #endif
